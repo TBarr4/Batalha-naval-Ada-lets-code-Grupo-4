@@ -77,6 +77,20 @@ Após o projeto ser clonado em sua maquina, para  executá-lo basta abrir o comp
   </tr>
 </table>
 
+
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/eduardowmu">
+        <img src="https://avatars.githubusercontent.com/u/30440158?v=4" width="100px;" alt="Foto de eduardowmu no GitHub"/><br>
+        <sub>
+          <b>eduardowmu</b>
+        </sub>
+      </a>
+    </td>
+  </tr>
+</table>
+
 <div class="badge-base LI-profile-badge" data-locale="pt_BR" data-size="large" data-theme="dark" data-type="HORIZONTAL" data-vanity="tomas-barra" data-version="v1"><a class="badge-base__link LI-simple-link" href="https://br.linkedin.com/in/tomas-barra?trk=profile-badge">Tomás Barra</a></div>
               
 <div class="badge-base LI-profile-badge" data-locale="pt_BR" data-size="large" data-theme="dark" data-type="HORIZONTAL" data-vanity="moisesdeassisjr" data-version="v1"><a class="badge-base__link LI-simple-link" href="https://br.linkedin.com/in/moisesdeassisjr?trk=profile-badge">Moises de Assis Jr</a></div>
