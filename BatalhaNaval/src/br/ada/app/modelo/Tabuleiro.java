@@ -7,7 +7,7 @@ public class Tabuleiro {
 										+ "				%s\n"
 										+ "-------------------------------------------------------------------------\n";
 	
-	public void exibir(int[][] posicoes, Jogador jogador) {
+	public void exibir(String[][] posicoes, Jogador jogador) {
 		String tipo = jogador instanceof Humano ? JOGADOR : MAQUINA;
 		String tabela = TITULO;
 		for(int i = 0; i < 9; i++) {
