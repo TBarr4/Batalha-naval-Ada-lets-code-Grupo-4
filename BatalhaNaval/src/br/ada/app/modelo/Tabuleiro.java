@@ -21,7 +21,7 @@ public class Tabuleiro {
 				if(j == 0) {
 					tabela += "| " + getCharacter(i) + " ";
 				} else {
-					tabela += "|   ";
+					tabela += i == 0 ? "| " + (j - 1) + " " : "|   ";
 				}
 			}
 			tabela += "|\n---------------------------------------------\n";
