@@ -1,7 +1,7 @@
 package br.ada.app.modelo;
 
 public class Humano extends Jogador {
-@Override
+	@Override
 	public void atirar(int x, int y, Tabuleiro tabuleiro) {
 		// TODO Auto-generated method stub
 		

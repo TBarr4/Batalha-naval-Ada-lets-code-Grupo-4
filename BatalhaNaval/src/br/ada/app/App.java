@@ -6,9 +6,8 @@ import br.ada.app.modelo.Tabuleiro;
 public class App {
 
 	public static void main(String[] args) {
-		String[][] posicoes = new String[9][9];
 		Humano humano = new Humano();
 		Tabuleiro tabuleiro = new Tabuleiro();
-		tabuleiro.exibir(posicoes, humano);
+		tabuleiro.exibir(humano);
 	}
 }
