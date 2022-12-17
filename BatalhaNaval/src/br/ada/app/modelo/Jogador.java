@@ -34,7 +34,9 @@ public abstract class Jogador {
 		//posições do tabuleiro de quem chamou o método
 		String[][] pos = this.tabuleiro.getPosicoes();
 		
-		if(posicoes[linha][coluna].equals(MarcacaoEnum.NAVIO_POS.getMarca())) {
+		if(posicoes[linha][coluna].equals(MarcacaoEnum.NAVIO_POS.getMarca()) ||
+			posicoes[linha][coluna].equals(MarcacaoEnum.TIRO_AGUA_NAVIO.getMarca())) {
+			
 			posicoes[linha][coluna] = MarcacaoEnum.TIRO_CERTEIRO_NAVIO.getMarca();
 			this.pontos++;
 			if(pos[linha][coluna].equals(MarcacaoEnum.NAVIO_POS.getMarca())) {
@@ -42,7 +44,8 @@ public abstract class Jogador {
 			} else {
 				pos[linha][coluna] = MarcacaoEnum.TIRO_CERTEIRO.getMarca();
 			}
-		} else if(posicoes[linha][coluna].equals(MarcacaoEnum.VAZIO.getMarca())) {
+		} else if(posicoes[linha][coluna].equals(MarcacaoEnum.VAZIO.getMarca()) ||
+					posicoes[linha][coluna].equals(MarcacaoEnum.TIRO_AGUA.getMarca())) {
 			if(pos[linha][coluna].equals(MarcacaoEnum.VAZIO.getMarca())) {
 				pos[linha][coluna] = MarcacaoEnum.TIRO_AGUA.getMarca();
 			} 
