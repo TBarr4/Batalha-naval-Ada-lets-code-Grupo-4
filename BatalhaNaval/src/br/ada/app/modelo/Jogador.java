@@ -37,13 +37,15 @@ public abstract class Jogador {
 		if(posicoes[linha][coluna].equals(MarcacaoEnum.NAVIO_POS.getMarca())) {
 			posicoes[linha][coluna] = MarcacaoEnum.TIRO_CERTEIRO_NAVIO.getMarca();
 			this.pontos++;
-			if(pos[linha][coluna].equals(MarcacaoEnum.NAVIO_POS)) {
+			if(pos[linha][coluna].equals(MarcacaoEnum.NAVIO_POS.getMarca())) {
 				pos[linha][coluna] = MarcacaoEnum.TIRO_AGUA_NAVIO.getMarca();
 			} else {
 				pos[linha][coluna] = MarcacaoEnum.TIRO_CERTEIRO.getMarca();
 			}
 		} else if(posicoes[linha][coluna].equals(MarcacaoEnum.VAZIO.getMarca())) {
-			pos[linha][coluna] = MarcacaoEnum.TIRO_AGUA.getMarca();
-		}
+			if(pos[linha][coluna].equals(MarcacaoEnum.VAZIO.getMarca())) {
+				pos[linha][coluna] = MarcacaoEnum.TIRO_AGUA.getMarca();
+			} 
+		} 
 	}
 }

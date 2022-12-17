@@ -11,10 +11,18 @@ public class Humano extends Jogador {
 	
 	@Override//O objeto de tipo Tabuleiro pertence à maquina 
 	public void atirar(Tabuleiro tabuleiro, int rodada) {
+		//posiçoes referentes ao tabuleiro da máquina
 		String[][] posicoes = tabuleiro.getPosicoes();
-		Scanner entrada = new Scanner(System.in);
-		int linha = this.retornaLinha(rodada, "tiro", entrada);
-		int coluna = this.retornaColuna(entrada);
+		//posições do jogador
+		String[][] pos = this.tabuleiro.getPosicoes();
+		int linha = this.retornaLinha(rodada, "tiro");
+		int coluna = this.retornaColuna(rodada);
+		if(!pos[linha][coluna].equals(MarcacaoEnum.VAZIO.getMarca()) && 
+			!pos[linha][coluna].equals(MarcacaoEnum.NAVIO_POS.getMarca())) {
+			
+			System.out.println("Voca ja teve esse territorio marcado. Tente novamente.");
+			this.atirar(tabuleiro, rodada);
+		}
 		this.marcarTabuleiros(tabuleiro, posicoes, linha, coluna);
 	}
 
@@ -22,10 +30,9 @@ public class Humano extends Jogador {
 	public void posicionarNavios() {
 		System.out.println("Posicione seus 10 navios");
 		String[][] posicoes = this.tabuleiro.getPosicoes();
-		Scanner entrada = new Scanner(System.in);
 		for(int i = 0; i < 10; i++) {
-			int linha = this.retornaLinha(i, "navio", entrada);
-			int coluna = this.retornaColuna(entrada);
+			int linha = this.retornaLinha(i, "navio");
+			int coluna = this.retornaColuna(i);
 			if(posicoes[linha][coluna].equals(MarcacaoEnum.NAVIO_POS.getMarca())) {
 				System.out.println("Ja existe navio nessa posiçao. Tente novamente");
 				i--;
@@ -40,11 +47,12 @@ public class Humano extends Jogador {
 		this.tabuleiro.setPosicoes(posicoes);
 	}
 	
-	private int retornaLinha(int i, String nome, Scanner entrada) {
+	private int retornaLinha(int i, String nome) {
 		System.out.printf("Insira a linha do %s %d (A-J || a-j): ", nome, (i+1));
-		
+		Scanner entrada = new Scanner(System.in);
 		try {
-			String linha = entrada.nextLine();
+			String linha = entrada.next();
+			
 			switch(linha.toUpperCase()) {
 				case "A": return 1;
 				case "B": return 2;
@@ -58,16 +66,17 @@ public class Humano extends Jogador {
 				case "J": return 10;
 				default: 
 					this.invalidaDados();
-					return retornaLinha(i, nome, new Scanner(System.in));
+					return retornaLinha(i, nome);
 			}
 		} catch(Exception e) {
 			System.out.println(e.getMessage());
 			this.invalidaDados();
-			return retornaLinha(i, nome, new Scanner(System.in));
+			return retornaLinha(i, nome);
 		}
 	}
 	
-	private int retornaColuna(Scanner entrada ) {
+	private int retornaColuna(int i) {
+		Scanner entrada = new Scanner(System.in);
 		System.out.print("Insira a coluna (0-9): ");
 		int coluna = 0;
 		try {
@@ -83,16 +92,14 @@ public class Humano extends Jogador {
 				case 7: 
 				case 8: 
 				case 9: 
-					entrada.close();
 					return ++coluna;
 				default:
 					this.invalidaDados();
-					entrada.close();
-					return retornaColuna(new Scanner(System.in));
+					return retornaColuna(i);
 			}
 		} catch(Exception e) {
 			this.invalidaDados();
-			return retornaColuna(new Scanner(System.in));
+			return retornaColuna(i);
 		}
 	}
 	

@@ -14,8 +14,7 @@ public class App {
 		
 		humano.posicionarNavios();
 		maquina.posicionarNavios();
-		
-		int rodada = 1;
+		int rodada = 0;
 		
 		do {
 			humano.getTabuleiro().exibir(humano);
