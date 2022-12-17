@@ -45,7 +45,7 @@ public abstract class Jogador {
 				pos[linha][coluna] = MarcacaoEnum.TIRO_CERTEIRO.getMarca();
 			}
 		} else if(posicoes[linha][coluna].equals(MarcacaoEnum.VAZIO.getMarca()) ||
-					posicoes[linha][coluna].equals(MarcacaoEnum.TIRO_AGUA.getMarca())) {
+				posicoes[linha][coluna].equals(MarcacaoEnum.TIRO_AGUA.getMarca())) {
 			if(pos[linha][coluna].equals(MarcacaoEnum.VAZIO.getMarca())) {
 				pos[linha][coluna] = MarcacaoEnum.TIRO_AGUA.getMarca();
 			} 
