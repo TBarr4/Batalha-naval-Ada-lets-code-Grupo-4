@@ -1,5 +1,7 @@
 package br.ada.app.modelo;
 
+import br.ada.app.enumeration.MarcacaoEnum;
+
 public class Tabuleiro {
 	private String[][] posicoes;
 	
@@ -11,18 +13,33 @@ public class Tabuleiro {
 	
 	public Tabuleiro() {
 		this.posicoes = new String[11][11];
+		for(int i = 0; i < 11; i++) {
+			for(int j = 0; j < 11; j++) {
+				if(j == 0) {
+					this.posicoes[i][j] = this.getCharacter(i);
+				} else if(i == 0) {
+					this.posicoes[i][j] = j-1 + "";
+				} else {
+					this.posicoes[i][j] = MarcacaoEnum.VAZIO.getMarca();
+				}
+			}
+		}
 	}
 	
+	public String[][] getPosicoes() {
+		return posicoes;
+	}
+
+	public void setPosicoes(String[][] posicoes) {
+		this.posicoes = posicoes;
+	}
+
 	public void exibir(Jogador jogador) {
 		String tipo = jogador instanceof Humano ? JOGADOR : MAQUINA;
 		String tabela = TITULO;
 		for(int i = 0; i < 11; i++) {
 			for(int j = 0; j < 11; j++) {
-				if(j == 0) {
-					tabela += "| " + getCharacter(i) + " ";
-				} else {
-					tabela += i == 0 ? "| " + (j - 1) + " " : "|   ";
-				}
+				tabela += "| " + this.getValor(posicoes, i, j) + MarcacaoEnum.VAZIO.getMarca();
 			}
 			tabela += "|\n---------------------------------------------\n";
 		}
@@ -43,5 +60,9 @@ public class Tabuleiro {
 			case 10: return "J";
 			default: return " ";
 		}
+	}
+	
+	private String getValor(String[][] posicoes, int linha, int coluna) {
+		return posicoes[linha][coluna] != null ? posicoes[linha][coluna] : "";
 	}
 }

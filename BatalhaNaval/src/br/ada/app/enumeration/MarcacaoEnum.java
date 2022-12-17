@@ -5,7 +5,8 @@ public enum MarcacaoEnum {
 	TIRO_CERTEIRO("*"),
 	TIRO_AGUA("-"),
 	TIRO_CERTEIRO_NAVIO("X"),
-	TIRO_AGUA_NAVIO("n");
+	TIRO_AGUA_NAVIO("n"),
+	VAZIO(" ");
 	
 	private String marca;
 	
