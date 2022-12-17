@@ -9,21 +9,23 @@ public class Humano extends Jogador {
 		super(tabuleiro);
 	}
 	
-	@Override//Tabuleiro da maquina como parametro 
-	public void atirar(Tabuleiro tabuleiro) {
+	@Override//O objeto de tipo Tabuleiro pertence à maquina 
+	public void atirar(Tabuleiro tabuleiro, int rodada) {
 		String[][] posicoes = tabuleiro.getPosicoes();
-		int linha = this.getValor();
-		int coluna = this.getValor();
-		
+		Scanner entrada = new Scanner(System.in);
+		int linha = this.retornaLinha(rodada, "tiro", entrada);
+		int coluna = this.retornaColuna(entrada);
+		this.marcarTabuleiros(tabuleiro, posicoes, linha, coluna);
 	}
 
 	@Override
 	public void posicionarNavios() {
 		System.out.println("Posicione seus 10 navios");
-		String[][] posicoes = this.tabuleiro.getPosicoes(); 
+		String[][] posicoes = this.tabuleiro.getPosicoes();
+		Scanner entrada = new Scanner(System.in);
 		for(int i = 0; i < 10; i++) {
-			int linha = this.retornaLinha(i);
-			int coluna = this.retornaColuna(i);
+			int linha = this.retornaLinha(i, "navio", entrada);
+			int coluna = this.retornaColuna(entrada);
 			if(posicoes[linha][coluna].equals(MarcacaoEnum.NAVIO_POS.getMarca())) {
 				System.out.println("Ja existe navio nessa posiçao. Tente novamente");
 				i--;
@@ -38,87 +40,63 @@ public class Humano extends Jogador {
 		this.tabuleiro.setPosicoes(posicoes);
 	}
 	
-	private int retornaLinha(int i) {
-		Scanner entrada = new Scanner(System.in);
-		System.out.printf("Insira a linha do navio %d (A-J || a-j): ", (i+1));
-		String linha = entrada.nextLine();
-		switch(linha.toUpperCase()) {
-			case "A": return 1;
-			case "B": return 2;
-			case "C": return 3;
-			case "D": return 4;
-			case "E": return 5;
-			case "F": return 6;
-			case "G": return 7;
-			case "H": return 8;
-			case "I": return 9;
-			case "J": return 10;
-			default: 
-				this.invalidaDados();
-				return retornaLinha(i);
+	private int retornaLinha(int i, String nome, Scanner entrada) {
+		System.out.printf("Insira a linha do %s %d (A-J || a-j): ", nome, (i+1));
+		
+		try {
+			String linha = entrada.nextLine();
+			switch(linha.toUpperCase()) {
+				case "A": return 1;
+				case "B": return 2;
+				case "C": return 3;
+				case "D": return 4;
+				case "E": return 5;
+				case "F": return 6;
+				case "G": return 7;
+				case "H": return 8;
+				case "I": return 9;
+				case "J": return 10;
+				default: 
+					this.invalidaDados();
+					return retornaLinha(i, nome, new Scanner(System.in));
+			}
+		} catch(Exception e) {
+			System.out.println(e.getMessage());
+			this.invalidaDados();
+			return retornaLinha(i, nome, new Scanner(System.in));
 		}
 	}
 	
-	private int retornaColuna(int i) {
-		Scanner entrada = new Scanner(System.in);
+	private int retornaColuna(Scanner entrada ) {
 		System.out.print("Insira a coluna (0-9): ");
-		int y = 0;
+		int coluna = 0;
 		try {
-			y = entrada.nextInt();
-			switch(y) {
-				case 0: return 1;
-				case 1: return 2;
-				case 2: return 3;
-				case 3: return 4;
-				case 4: return 5;
-				case 5: return 6;
-				case 6: return 7;
-				case 7: return 8;
-				case 8: return 9;
-				case 9: return 10;
+			coluna = entrada.nextInt();
+			switch(coluna) {
+				case 0: 
+				case 1: 
+				case 2: 
+				case 3: 
+				case 4: 
+				case 5: 
+				case 6: 
+				case 7: 
+				case 8: 
+				case 9: 
+					entrada.close();
+					return ++coluna;
 				default:
 					this.invalidaDados();
-					return retornaColuna(i);
+					entrada.close();
+					return retornaColuna(new Scanner(System.in));
 			}
 		} catch(Exception e) {
 			this.invalidaDados();
-			return retornaColuna(i);
-		}
-	}
-	
-	private int getValor() {
-		Scanner entrada = new Scanner(System.in);
-		int valor = 0;
-		try {
-			valor = entrada.nextInt();
-			entrada.close();
-			return valor;
-		} catch(Exception e) {
-			this.invalidaDados();
-			entrada.close();
-			return this.getValor();
+			return retornaColuna(new Scanner(System.in));
 		}
 	}
 	
 	private void invalidaDados() {
 		System.out.println("Valor inválido. Tente novamente");
-	}
-	
-	//os parametros do método são todos relacionados ao tabuleiro da máquina
-	private void marcarTabuleiros(Tabuleiro tabuleiro, String[][] posicoes, int linha, int coluna) {
-		//posições do tabuleiro do objeto jogador humano
-		String[][] pos = this.tabuleiro.getPosicoes();
-		
-		if(posicoes[linha][coluna].equals(MarcacaoEnum.NAVIO_POS.getMarca())) {
-			posicoes[linha][coluna] = MarcacaoEnum.TIRO_CERTEIRO_NAVIO.getMarca();
-			this.pontos++;
-			if(pos[linha][coluna].equals(MarcacaoEnum.NAVIO_POS)) {
-				pos[linha][coluna] = MarcacaoEnum.TIRO_AGUA_NAVIO.getMarca();
-			} else {
-				pos[linha][coluna] = MarcacaoEnum.TIRO_CERTEIRO.getMarca();
-			}
-		} else if(posicoes[linha][coluna].equals(MarcacaoEnum.VAZIO.getMarca())) {
-			pos[linha][coluna] = MarcacaoEnum.TIRO_AGUA.getMarca();
-		}
 	}
 }

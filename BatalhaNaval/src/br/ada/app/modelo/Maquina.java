@@ -9,10 +9,17 @@ public class Maquina extends Jogador {
 		super(tabuleiro);
 	}
 	
+	/*O objeto de tipo Tabuleiro pertence à maquina como parametro*/
 	@Override
-	public void atirar(Tabuleiro tabuleiro) {
-		// TODO Auto-generated method stub
-		
+	public void atirar(Tabuleiro tabuleiro, int rodada) {
+		String[][] posicoes = tabuleiro.getPosicoes();
+		Random random = new Random();
+		int linha = random.nextInt(10);
+		int coluna = random.nextInt(10);
+		//incrementar 1 caso valor seja zero.
+		linha += linha == 0 ? 1 : 0;
+		coluna += coluna == 0 ? 1 : 0;
+		this.marcarTabuleiros(tabuleiro, posicoes, linha, coluna);
 	}
 
 	@Override
