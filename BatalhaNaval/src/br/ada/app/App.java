@@ -37,7 +37,6 @@ public class App {
 	}
 	
 	private static void instrucoes() {
-
 		System.out.println("Batalha Naval.");
 		System.out.println("Neste jogo de tabuleiro, o objetivo é acertar os navios inimigos.");
 		System.out.println("Cada jogador posicionará 10 navios em qualquer coordenada do seu tabuleiro de 10x10.");
@@ -45,6 +44,5 @@ public class App {
 		System.out.println("Para realizar ataques informe as coordenadas no formato letra e numero. Ex. A1, H3, etc.");
 		System.out.println("Vencerá o jogo quem acertar primeiro todas as 10 embarcações inimigas.");
 		System.out.println("Boa sorte!");
-
 	}
 }
